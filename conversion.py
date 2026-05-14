@@ -46,17 +46,24 @@ def evaluate_choice():
                 except ValueError:
                         print("fucking enter 1 or 2 you dumbass")
                 if choice == 1:
-                        convert_percent()
-                        break
+                        percent = convert_percent()
+                        return percent
                 elif choice == 2:
-                        convert_points()
-                        break      
+                        percent = convert_points()
+                        return percent
                 else:
                         print("Error- Enter either 1 or 2")
                         
         
 def convert_percent():
-        percent = input(f"please enter the % you got")
+        try:
+                print(f"\nProceed with entering your % below: ")
+                percent = int(input(f""))
+                return percent
+        except ValueError:
+                print("\nError - NaN (Points!)") 
+                
+
 def convert_points():
         while True:
                 print(f"\nPlease enter the amount of points you got")
@@ -77,9 +84,9 @@ def convert_points():
                 if points > max_points:
                         print(f"\nYou can't have {points} when the maximum you can get is {max_points}!")
                 
-                print("\nTESTING")
-                print(f"{points} / {max_points}")
-        
+                percent = (points / max_points * 100)
+                return percent
+                
 while True:
         percent = 0
         points = 0
@@ -87,7 +94,7 @@ while True:
         german_grade = 1
         cambridge_grade = 1
 
-        evaluate_choice()
+        percent = evaluate_choice()
 
         for grade in valueGerm:
                 if percent >= grade.value:
