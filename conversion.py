@@ -1,3 +1,5 @@
+import sys
+
 from dataclasses import dataclass
 from typing import List
 
@@ -88,12 +90,9 @@ def convert_points():
                 return percent
                 
 while True:
-        percent = 0
-        points = 0
-        max_points = 0                        
+        percent = 0       
         german_grade = 1
         cambridge_grade = 1
-
         percent = evaluate_choice()
 
         for grade in valueGerm:
@@ -106,4 +105,15 @@ while True:
                         cambridge_grade = grade.name
                         break
 
-        print(f"\nWith your {percent}% you would be getting a {german_grade} in germany or a {cambridge_grade} in Cambridge!")
+        print(f"\nWith your {percent}% you would be getting a {german_grade} in germany or a {cambridge_grade} in Cambridge!\n")
+        while True:
+                repeat = input(f"\nGot another one? (y/n)")
+                if repeat == "n" or repeat == "no":
+                        print("\nExiting.. See you soon!")
+                        sys.exit(0)
+                elif repeat == "y" or repeat == "yes":
+                        continue
+                else:
+                        print("Error - NaN (enter y/n)")
+                        continue
+                
