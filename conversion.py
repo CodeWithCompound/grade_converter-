@@ -29,45 +29,65 @@ valueCambridge: List[Grade] = [
         Grade("U", 0)
 ]
 
-
 def check_int(x):
                 try:
-                        percent = int(x)
-                        return percent
+                        x = int(x)
+                        return x
                 except ValueError:
                         print("Error - NaN")
 
-def convert_percent():
+# -- Lets you choose between % or points/max_points --
+def evaluate_choice():
         while True:
+                choice = input(f"Enter either \n1: if you have the % of right questions \n\nor\n\n 2: if you have the amount of points you got AND the maximum points you could have gotten\n").strip()
                 
+                try:
+                        choice = int(choice)
+                except ValueError:
+                        print("fucking enter 1 or 2 you dumbass")
+                if choice == 1:
+                        convert_percent()
+                        break
+                elif choice == 2:
+                        convert_points()
+                        break      
+                else:
+                        print("Error- Enter either 1 or 2")
+                        
+        
+def convert_percent():
+        percent = input(f"please enter the % you got")
+def convert_points():
+        while True:
+                print(f"\nPlease enter the amount of points you got")
 
+                try:
+                        points = int(input(f"Enter your points: "))
+                except ValueError:
+                        print("\nError - NaN (Points!)") 
+                        break
+                
+                print(f"\nAlright! now we just need to know how many points in total you could have gotten!")
+                try:
+                        max_points = int(input(f"Enter max points: "))
+                except ValueError:
+                        print("\nError - NaN (MaxPoints!)") 
+                        break
 
+                if points > max_points:
+                        print(f"\nYou can't have {points} when the maximum you can get is {max_points}!")
+                
+                print("\nTESTING")
+                print(f"{points} / {max_points}")
+        
 while True:
         percent = 0
         points = 0
         max_points = 0                        
-        choice = input("please choose between entering a percent of right awnsers (enter 1) or if you want to enter the point you got and the maximum you could have gotten\n").strip()
-
-        try:
-                choice = int(choice)
-        except ValueError:
-                print("fucking enter 1 or 2 you dumbass")
-        
-        if choice == 1:
-                percent = input(f"please enter the % you got")
-                percent = check_int(percent)
-                
-        elif choice == 2:
-                input(f"")
-        
-        else: 
-                print("Error- Enter either 1 or 2")
-                break
-        
         german_grade = 1
         cambridge_grade = 1
 
-
+        evaluate_choice()
 
         for grade in valueGerm:
                 if percent >= grade.value:
@@ -78,6 +98,5 @@ while True:
                 if percent >= grade.value:
                         cambridge_grade = grade.name
                         break
-
 
         print(f"\nWith your {percent}% you would be getting a {german_grade} in germany or a {cambridge_grade} in Cambridge!")
